@@ -56,8 +56,28 @@ Route::group(['prefix' => 'hobbies'], function () {
 
 });
 
+//Routes for peoples input
+
+Route::group(['prefix' => 'peoples'], function () {
+
+    Route::post('/create/', [
+
+        'as' => 'app.peoples.create', 'uses' => 'PPHPeoplesController@create'
+
+    ]);
+
+    Route::get('/create/', [
+
+        'uses' => 'PPHPeoplesController@showCreate'
+    ]);
+
+});
 
 
+
+
+
+//Routes for fake generators
 
 Route::get('/generate-fake-data/peoples/{count?}/',[
 

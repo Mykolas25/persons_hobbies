@@ -1,32 +1,29 @@
 <?php namespace App\Http\Controllers;
 
+use App\models\HCPeoples;
+use App\models\HCCity;
 use Illuminate\Routing\Controller;
 
 class PPHPeoplesController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /pphpeoples
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /pphpeoples/create
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+    public function showCreate()
+    {
+        return view('peoplesForm');
+    }
+    public function create()
+    {
+        HCPeoples::create([
+            'name' => $_POST['name'],
+            'city_id' => HCCity::get()->where('name', '=', $_POST['city'])->random()->id
+        ]);
+        dd('Irašas ' . $_POST['name'] . " ir įrašas " . $_POST['city'] .' sukurtas');
+        //$data['name'] = $data['city']; jei formoje imputname skiriasi nuo duombazes name
+    }
 
-	/**
+
+
+    /**
 	 * Store a newly created resource in storage.
 	 * POST /pphpeoples
 	 *
