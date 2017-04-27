@@ -1,30 +1,24 @@
 <?php namespace App\Http\Controllers;
 
+use App\models\HCHobbies;
 use Illuminate\Routing\Controller;
 
 class PPHHobbiesController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 * GET /pphhobbies
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 * GET /pphhobbies/create
-	 *
-	 * @return Response
-	 */
+	public function showCreate()
+	{
+	    return view('hobbiesForm');
+	}
 	public function create()
 	{
-		//
+        $data = request()->all();
+        HCHobbies::create($data);
+        dd('Irašas ' . $_POST['name'] . ' sukurtas');
+        //$data['name'] = $data['city']; jei formoje imputname skiriasi nuo duombazes name
 	}
+
+
 
 	/**
 	 * Store a newly created resource in storage.

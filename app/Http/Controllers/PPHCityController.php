@@ -16,7 +16,7 @@ class PPHCityController extends Controller {
     {
         $data = request()->all();
         HCCity::create($data);
-        dd('Miestas ' . $_POST['name'] . ' sukreatinta');
+        dd('Miestas ' . $_POST['name'] . ' sukurta');
         //$data['name'] = $data['city']; jei formoje imputname skiriasi nuo duombazes name
 
 
@@ -25,7 +25,7 @@ class PPHCityController extends Controller {
 
 	public function showCreate()
 	{
-		return view('form');
+		return view('citiesForm');
 	}
 
 

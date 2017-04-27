@@ -22,6 +22,8 @@
 //    return view('form');
 //});
 
+//Routes for city input
+
 Route::group(['prefix' => 'cities'], function () {
 
     Route::post('/create/', [
@@ -36,6 +38,24 @@ Route::group(['prefix' => 'cities'], function () {
     ]);
 
 });
+
+//Routes for hobbies input
+
+Route::group(['prefix' => 'hobbies'], function () {
+
+    Route::post('/create/', [
+
+        'as' => 'app.hobbies.create', 'uses' => 'PPHHobbiesController@create'
+
+    ]);
+
+    Route::get('/create/', [
+
+        'uses' => 'PPHHobbiesController@showCreate'
+    ]);
+
+});
+
 
 
 
@@ -54,6 +74,7 @@ Route::get('/generate-fake-data/cities/{count?}/', [
 
 ]);
 
-
-
+Route::get('/', function () {
+    view('welcome');
+});
 
