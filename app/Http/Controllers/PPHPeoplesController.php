@@ -15,7 +15,7 @@ class PPHPeoplesController extends Controller {
     {
         HCPeoples::create([
             'name' => $_POST['name'],
-            'city_id' => HCCity::get()->where('name', '=', $_POST['city'])->random()->id
+            'city_id' => HCCity::where('name', '=', $_POST['city'])->get()->random()->id
         ]);
         dd('Irašas ' . $_POST['name'] . " ir įrašas " . $_POST['city'] .' sukurtas');
         //$data['name'] = $data['city']; jei formoje imputname skiriasi nuo duombazes name
