@@ -13,9 +13,11 @@ class PPHHobbiesController extends Controller {
 	public function create()
 	{
         $data = request()->all();
-        HCHobbies::create($data);
-        dd('Irašas ' . $_POST['name'] . ' sukurtas');
+        $record = HCHobbies::create($data);
+//        dd('Irašas ' . $_POST['name'] . ' sukurtas');
         //$data['name'] = $data['city']; jei formoje imputname skiriasi nuo duombazes name
+
+        return view('hobbiesForm', $record->toArray());
 	}
 
 

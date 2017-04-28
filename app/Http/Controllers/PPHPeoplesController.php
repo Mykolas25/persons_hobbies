@@ -2,23 +2,51 @@
 
 use App\models\HCPeoples;
 use App\models\HCCity;
+use App\models\HCHobbies;
+use App\models\HCPeoplesHobbiesConnections;
 use Illuminate\Routing\Controller;
+
 
 class PPHPeoplesController extends Controller {
 
 
     public function showCreate()
     {
-        return view('peoplesForm');
+        $config = [];
+        $config['hobbies'] = HCHobbies::pluck('name', 'id');
+        $config['cities'] = HCCity::pluck('name', 'id');
+        return view('peoplesForm', $config);
     }
+
+
+
+
+//    public function index()
+//    {
+//       dd(HCCity::pluck('id'));
+//    }
+
     public function create()
     {
-        HCPeoples::create([
+     //   $data = request()->all();
+
+        $record = HCPeoples::create([
             'name' => $_POST['name'],
-            'city_id' => HCCity::where('name', '=', $_POST['city'])->get()->random()->id
+            'city_id' => $_POST['City'],
+
+                HCPeoplesHobbiesConnections::create([
+                    'hobbies_id' => $_POST['Hobbies'],
+                    'peoples_id' => Uuid::uuid4()
+
+                   //'peoples_id'=> HCPeoples::where('id', '=', $_POST['name'])->get()->random()->id
+            ])
+            //'city_id' => HCCity::where('name', '=', $_POST['city'])->get()->random()->id
         ]);
-        dd('Irašas ' . $_POST['name'] . " ir įrašas " . $_POST['city'] .' sukurtas');
-        //$data['name'] = $data['city']; jei formoje imputname skiriasi nuo duombazes name
+//        dd('Irašas ' . $_POST['name'] . " ir įrašas " . $_POST['city'] .' sukurtas');
+//        //$data['name'] = $data['city']; jei formoje imputname skiriasi nuo duombazes name
+
+
+        return view('peoplesForm', $record->toArray());
     }
 
 
@@ -41,9 +69,9 @@ class PPHPeoplesController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show()
 	{
-		//
+
 	}
 
 	/**

@@ -15,25 +15,17 @@ class PPHCityController extends Controller {
 	public function create()
     {
         $data = request()->all();
-        HCCity::create($data);
-        dd('Miestas ' . $_POST['name'] . ' sukurta');
+        $record = HCCity::create($data);
+
+//        dd('Miestas ' . $_POST['name'] . ' sukurta');
         //$data['name'] = $data['city']; jei formoje imputname skiriasi nuo duombazes name
-
-
-
+        return view('citiesForm', $record->toArray());
     }
 
 	public function showCreate()
 	{
 		return view('citiesForm');
 	}
-
-
-
-
-
-
-
 
 
 

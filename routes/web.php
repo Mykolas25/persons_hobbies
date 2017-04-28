@@ -63,8 +63,9 @@ Route::group(['prefix' => 'peoples'], function () {
     Route::post('/create/', [
 
         'as' => 'app.peoples.create', 'uses' => 'PPHPeoplesController@create'
-
     ]);
+
+
 
     Route::get('/create/', [
 
