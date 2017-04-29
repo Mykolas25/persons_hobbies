@@ -12,15 +12,14 @@ class CreatePeoplesHobbiesConnectionsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('peoples_hobbies_connections', function(Blueprint $table)
-		{
-			$table->integer('count', true);
-			$table->timestamps();
-			$table->softDeletes();
-			$table->string('peoples_id', 36)->index('fk_peoples_hobbies_connections_people1_idx');
-			$table->string('hobbies_id', 45)->index('fk_peoples_hobbies_connections_hobbies_idx');
-		});
-	}
+        Schema::disableForeignKeyConstraints();
+
+        Schema::table('peoples_hobbies_connections', function (Blueprint $table) {
+            $table->string('hobbies_id', 36)->change();
+        });
+        Schema::enableForeignKeyConstraints();
+
+    }
 
 
 	/**

@@ -24,6 +24,16 @@
 
 //Routes for city input
 
+
+
+
+Route::get('/', [
+
+    'uses' => 'PPHPeoplesController@index'
+]);
+
+
+
 Route::group(['prefix' => 'cities'], function () {
 
     Route::post('/create/', [
@@ -95,7 +105,7 @@ Route::get('/generate-fake-data/cities/{count?}/', [
 
 ]);
 
-Route::get('/', function () {
-    view('welcome');
-});
+//Route::get('/', function () {
+//    view('welcome');
+//});
 

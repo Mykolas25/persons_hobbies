@@ -22,7 +22,7 @@
 
 {!! Form::text('name') !!}
 
-{!! Form::select('City', App\models\HCCity::pluck('name', 'id')) !!}
+{!! Form::select('city_id', App\models\HCCity::pluck('name', 'id')) !!}
 
 {{--{!! Form::checkbox('Hobbies', App\models\HCHobbies::pluck('name', 'id')) !!}--}}
 

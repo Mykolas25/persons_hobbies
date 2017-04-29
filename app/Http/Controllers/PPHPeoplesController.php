@@ -1,13 +1,27 @@
-<?php namespace App\Http\Controllers;
+<?php
+
+namespace App\Http\Controllers;
 
 use App\models\HCPeoples;
 use App\models\HCCity;
 use App\models\HCHobbies;
 use App\models\HCPeoplesHobbiesConnections;
 use Illuminate\Routing\Controller;
-
+use Ramsey\Uuid\Uuid;
 
 class PPHPeoplesController extends Controller {
+
+
+    public function index()
+    {
+
+        return HCPeoples::with(['peoplesHobbies'])->get();
+        $configuration = [];
+        $configuration["peoples"] = HCPeoples::with(['peoplesHobbies'])->get();
+//        $configuration["totalCount"] = sizeof($configuration['clients']);
+        dd($configuration);
+        return view('main', $configuration);
+    }
 
 
     public function showCreate()
@@ -26,28 +40,42 @@ class PPHPeoplesController extends Controller {
 //       dd(HCCity::pluck('id'));
 //    }
 
+
+
     public function create()
     {
-     //   $data = request()->all();
+
+        $data = request()->all();
+
+//       dd($data);
 
         $record = HCPeoples::create([
-            'name' => $_POST['name'],
-            'city_id' => $_POST['City'],
-
-                HCPeoplesHobbiesConnections::create([
-                    'hobbies_id' => $_POST['Hobbies'],
-                    'peoples_id' => Uuid::uuid4()
-
-                   //'peoples_id'=> HCPeoples::where('id', '=', $_POST['name'])->get()->random()->id
-            ])
-            //'city_id' => HCCity::where('name', '=', $_POST['city'])->get()->random()->id
+            'name' => $data['name'],
+            'city_id' => $data['city_id']
         ]);
+
+//        dd($data);
+        $record->hobbiesSyncing()->sync($data['hobbies']);
+
+    }
+
+
+
+
+//        foreach($_POST['hobbies'] as $hobby)
+//        {
+//            $record[] = HCPeoplesHobbiesConnections::create([
+//
+//                        'hobbies_id' => $hobby,
+//                        'peoples_id'=> HCPeoples:: where('name', '=', $_POST['name'])->get()->random()->id
+//                        ]);
+//        }
+//                        dd($record);
 //        dd('Irašas ' . $_POST['name'] . " ir įrašas " . $_POST['city'] .' sukurtas');
 //        //$data['name'] = $data['city']; jei formoje imputname skiriasi nuo duombazes name
 
 
-        return view('peoplesForm', $record->toArray());
-    }
+
 
 
 
